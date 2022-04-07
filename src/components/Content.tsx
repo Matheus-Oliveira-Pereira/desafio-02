@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { MovieCard } from "./MovieCard"
 
 interface ContentProps{
@@ -16,7 +17,7 @@ export interface MovieProps {
   Runtime: string;
 }
 
-export const Content:React.FC<ContentProps> = ({title, movies}:ContentProps) => {
+export const ComponentContent:React.FC<ContentProps> = ({title, movies}:ContentProps) => {
   return(
     <div className="container">
       <header>
@@ -33,3 +34,7 @@ export const Content:React.FC<ContentProps> = ({title, movies}:ContentProps) => 
     </div>
   );
 }
+
+export const Content = memo(ComponentContent, (prevProps, nextProps) => {
+  return Object.is(prevProps.movies, nextProps.movies);
+});
